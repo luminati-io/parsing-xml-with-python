@@ -10,7 +10,6 @@ Learn how to parse XML in Python using libraries like ElementTree, lxml, and SAX
 - [lxml](#lxml)
 - [minidom](#minidom)
 - [SAX Parser](#sax-parser)
-- [untangle](#untangle)
 
 ## Key Concepts of an XML File
 
@@ -377,57 +376,6 @@ https://brightdata.com/case-studies/seamless-digital-automations
 Unlike other parsers that load the entire file into memory, SAX processes files incrementally, saving memory and improving performance. However, it requires more code to handle each data segment and doesn’t allow revisiting parts of the data for later analysis.
 
 SAX is ideal for efficiently scanning large XML files (e.g., log files) to extract specific information (e.g., error messages). However, if your analysis needs to explore relationships between different data segments, SAX may not be the best choice.
-
-## untangle
-
-[untangle](https://untangle.readthedocs.io/en/latest/) is a lightweight Python library that simplifies XML parsing by allowing you to access XML elements and attributes directly as Python objects. Unlike traditional parsers, which require navigating through hierarchical structures, untangle converts XML documents into nested Python dictionaries. XML elements become dictionary keys, with attributes and text content stored as their corresponding values, making data manipulation easy with standard Python structures.
-
-Untangle is not part of the default Python library and needs to be installed using the following `PyPI` command:
-
-```sh
-pip install untangle
-```
-
-The following example demonstrates how to parse the XML file using the untangle library and access the XML elements:
-
-```python
-import untangle
-import requests
-
-url = "https://brightdata.com/post-sitemap.xml"
-
-response = requests.get(url)
-
-if response.status_code == 200:
-  
-    obj = untangle.parse(response.text)
-    
-    for url in obj.urlset.url:
-        print(url.loc.cdata.strip())
-else:
-    print("Failed to retrieve XML file from the URL.")
-```
-
-Your output will look like this:
-
-```
-https://brightdata.com/case-studies/powerdrop-case-study
-https://brightdata.com/case-studies/addressing-brand-protection-from-every-angle
-https://brightdata.com/case-studies/taking-control-of-the-digital-shelf-with-public-online-data
-https://brightdata.com/case-studies/the-seo-transformation
-https://brightdata.com/case-studies/data-driven-automated-e-commerce-tools
-https://brightdata.com/case-studies/highly-targeted-influencer-marketing
-https://brightdata.com/case-studies/data-driven-products-for-smarter-shopping-solutions
-https://brightdata.com/case-studies/workplace-diversity-facilitated-by-online-data
-https://brightdata.com/case-studies/alternative-travel-solutions-enabled-by-online-data-railofy
-https://brightdata.com/case-studies/data-intensive-analytical-solutions
-https://brightdata.com/case-studies/canopy-advantage-solutions
-https://brightdata.com/case-studies/seamless-digital-automations
-```
-
-Untangle simplifies XML parsing in Python by converting XML data into easy-to-use Python objects, eliminating the need for complex navigation. However, it requires separate installation as it’s not part of the core Python package.
-
-Use untangle when you need to quickly convert well-formed XML into Python objects for processing. For example, if you’re working with weather data in XML, untangle can help parse the data and create objects for temperature, humidity, and forecast, which can be easily manipulated in your application.
 
 ## Conclusion
 
